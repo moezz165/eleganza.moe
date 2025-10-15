@@ -190,7 +190,8 @@ main {
   border-radius: 10px; 
 }
 img:hover {
-  transform: scale(1.04);
+  transform: scale(1.5);
+  
   border-color: var(--gold);
   box-shadow: 0 30px 30px rgba(212, 175, 55, 0.25);
 }
@@ -264,6 +265,7 @@ img:hover {
   align-items: center;
   z-index: 1000;
 }
+
 
 
 
