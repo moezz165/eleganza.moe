@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="sv">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ELEGANZA - Hem</title>
+  <link rel="stylesheet" href="styles.css">
+
+  <style>
+    /* Popup-stil */
+    .popup {
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      background: white;
+      color: #333;
+      padding: 25px 40px;
+      border-radius: 10px;
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+      text-align: center;
+      font-size: 18px;
+      display: none;
+      z-index: 1000;
+      animation: fadeInOut 2s ease forwards;
+    }
+
+    @keyframes fadeInOut {
+      0% {
+        opacity: 0;
+        transform: translate(-50%, -60%);
+      }
+
+      10%,
+      90% {
+        opacity: 1;
+        transform: translate(-50%, -50%);
+      }
+
+      100% {
+        opacity: 0;
+        transform: translate(-50%, -40%);
+      }
+    }
+
+    .popup.show {
+      display: block;
+    }
+  </style>
+</head>
+
+<body>
+
+  <header class="sido-runrik">
+    <h1 class="brand">ELEGANZA</h1>
+    <p class="slogan">DRESS FOR CONFIDENCE</p>
+  </header>
+
+  <nav class="main-nav">
+    <a href="index.html">Hem</a>
+    <a href="produkter.html">Produkter</a>
+    <a href="kundvagn.html">Kundvagn</a>
+    <a href="betalning.html">Betalning</a>
+  </nav>
+
+  <main class="intruduktion">
+    <section class="välkommen">
+      <h1>Välkommen till Eleganza</h1>
+      <br><br>
+      <h2>Upptäck vår streetwear i hög kvalitet och fin stil till ett lågt pris.</h2>
+      <br><br>
+      <a class="btn" href="produkter.html">Kolla produkter</a>
+      <br><br>
+    </section>
+
+    <section class="populära">
+  <h2>Populära klädesplagg</h2>
+  <br><br>
+  <div class="produkter">
+    <div class="card">
+      <img src="https://m.media-amazon.com/images/I/71GpU8wfY5L._UY1000_.jpg" alt="Tracksuit unisex">
+      <br>
+      <h3>Tracksuit unisex</h3>
+      <br>
+      <p>Vit, grå, svart – 950kr</p>
+      <br>
+      <button class="add-to-cart" data-name="Tracksuit unisex" data-price="950">Lägg till i kundvagn</button>
+    </div>
+
+    <div class="card">
+      <img src="https://www.jhnsport.se/wp-content/uploads/2022/05/178336181-origpic-d45552-1024x1024.jpg" alt="Byxor unisex">
+      <br>
+      <h3>Byxor unisec</h3>
+      <br>
+      <p>Vit, grå, svart – 450kr</p>
+      <br>
+      <button class="add-to-cart" data-name="Byxor unisex" data-price="450">Lägg till i kundvagn</button>
+    </div>
+  </div>
+</section>
+  </main>
+
+  <footer class="footer">
+    <h3>Kontakt</h3>
+    <p>Kontaktperson: Mohannad Zkhoul</p>
+    <a href="mailto:eleganzaforconfidence@gmail.com">Mejl: eleganzaforconfidence@gmail.com</a><br>
+    <a href="telefonnummer">Telefon: 073123409</a><br><br>
+    <p>Hör av dig vid önskemål eller frågor!</p>
+  </footer>
+
+  <!-- Popup-ruta -->
+  <div id="popup" class="popup">Tack! Varan finns nu i kundvagnen!</div>
+
+  <script>
+    // Hämta befintlig kundvagn eller skapa ny
+    let cart = JSON.parse(localStorage.getItem("cart")) || [];
+    const popup = document.getElementById("popup");
+
+    // Visa popup-funktion
+    function showPopup() {
+      popup.classList.add("show");
+      setTimeout(() => popup.classList.remove("show"), 2000);
+    }
+
+    // Lägg till i kundvagn
+    document.querySelectorAll(".add-to-cart").forEach(button => {
+      button.addEventListener("click", () => {
+        const name = button.getAttribute("data-name");
+        const price = parseInt(button.getAttribute("data-price"));
+        cart.push({ name, price });
+        localStorage.setItem("cart", JSON.stringify(cart));
+        showPopup();
+      });
+    });
+  </script>
+
+</body>
+</html>

@@ -1,1 +1,1 @@
-# eleganza.moe
+# eleganza

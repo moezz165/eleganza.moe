@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="sv">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ELEGANZA - Kundvagn</title>
+  <link rel="stylesheet" href="styles.css">
+  <style>
+    .cart-item {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 10px;
+      padding: 5px;
+      border-bottom: 1px solid #ccc;
+    }
+
+    .cart-item button {
+      margin-left: 10px;
+    }
+
+    .btn {
+      display: inline-block;
+      padding: 10px 20px;
+      background-color: #333;
+      color: #fff;
+      text-decoration: none;
+      border-radius: 5px;
+    }
+
+    .btn:hover {
+      background-color: #555;
+    }
+  </style>
+</head>
+
+<body>
+  <header class="sido-runrik">
+    <h1 class="brand">ELEGANZA</h1>
+    <p class="slogan">DRESS FOR CONFIDENCE</p>
+  </header>
+  <nav class="main-nav">
+    <a href="index.html">Hem</a>
+    <a href="produkter.html">Produkter</a>
+    <a href="kundvagn.html">Kundvagn</a>
+    <a href="betalning.html">Betalning</a>
+  </nav>
+  <main class="intruduktion">
+    <h2>Din kundvagn</h2>
+    <div id="cart-items"></div>
+    <p id="total">Total: 0kr</p>
+    <button class="btn" id="clear-cart">Töm kundvagn</button>
+    <a class="btn" href="betalning.html">Gå till betalning</a>
+  </main>
+  <br><br><br>
+  <br><br><br>
+  <br><br><br>
+  <br><br><br>
+  <br><br><br>
+  <br><br><br>
+  <footer class="footer">
+   <h3>Kontakt</h3>
+    <br>
+    <p>Kontaktperson: Mohannad Zkhoul</p>
+    <br>
+    <a href="mailto:eleganzaforconfidence@gmail.com"> Mejl: eleganzaforconfidence@gmail.com</a></p>
+    <br>
+   <a href="telefonnummer">telefon: 0813383130</a>
+ <br> <br>
+    <p>hör av dig vid önskemål eller frågor!</p>
+  </footer>
+  <script>
+    let cart = JSON.parse(localStorage.getItem("cart")) || [];
+    const cartItemsDiv = document.getElementById("cart-items");
+    const totalP = document.getElementById("total");
+
+    function renderCart() {
+      cartItemsDiv.innerHTML = "";
+      let total = 0;
+      if (cart.length === 0) {
+        cartItemsDiv.innerHTML = "<p>Kundvagnen är tom.</p>";
+      } else {
+        cart.forEach((item, index) => {
+          total += item.price;
+          const itemDiv = document.createElement("div");
+          itemDiv.className = "cart-item";
+          itemDiv.innerHTML = `
+ <span>${item.name} - ${item.price}kr</span>
+ <button onclick="removeItem(${index})">Ta bort</button>
+ `;
+          cartItemsDiv.appendChild(itemDiv);
+        });
+      }
+      totalP.textContent = `Total: ${total}kr`;
+    }
+
+    function removeItem(index) {
+      cart.splice(index, 1);
+      localStorage.setItem("cart", JSON.stringify(cart));
+      renderCart();
+    }
+    document.getElementById("clear-cart").addEventListener("click", () => {
+      cart = [];
+      localStorage.setItem("cart", JSON.stringify(cart));
+      renderCart();
+    });
+    renderCart();
+  </script>
+</body>
+
+</html>
